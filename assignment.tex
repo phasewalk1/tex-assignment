@@ -1,0 +1,194 @@
+\documentclass[12pt,letterpaper, onecolumn]{exam}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fancyhdr}
+\usepackage{lmodern}
+\usepackage{tcolorbox}
+\usepackage{newtxmath,newtxtext}
+\usepackage{titlesec}
+\usepackage[lmargin=71pt, tmargin=1.2in]{geometry}  %For centering solution box
+\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage[T1]{fontenc}
+
+%% Aesthetic Hline Divider
+\newtcolorbox{divv}{colback=black!5!white, colframe=black, height=1pt}
+%% Basically \hline
+\newcommand{\divider}{\noindent\rule{\textwidth}{1pt}}
+
+%% Definition Box
+\newtcolorbox{defbox}{colback=gray!5!white, colframe=gray!75!black, title=Defn.}
+%% Theorem Box
+\newtcolorbox{thmbox}{colback=blue!5!white, colframe=blue!75!black, title=Thm.}
+%% Solution Box
+\newtcolorbox{solbox}{colback=gray!5!white, colframe=gray!75!black, title=Solution}
+
+% Define a custom environment for Definitions
+\newtheorem{definition}{Definition}[section] % Definitions are numbered within sections
+\newtheorem{theorem}[definition]{Theorem}    % Theorems share numbering with definitions
+\newtheorem{lemma}[definition]{Lemma}        % Lemmas share numbering with definitions
+\newtheorem{proposition}[definition]{Proposition} % Proposition sharing numbering with definitions
+
+\pagestyle{fancy}
+\fancyhead[L]{\textbf{Subject}}
+\fancyfoot[C]{\thepage}
+
+% ----------------- Begin Document ---------------------
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \Huge Course Subject\\[0.5em]
+    \LARGE Problem Set (Number)\\[1em]
+    \Large\textit{Your Name}\\[1em]
+    \Large\today
+    \vfill
+\end{titlepage}
+
+%\rule{\textwidth}{0.4pt}
+\pointsdroppedatright   %Self-explanatory
+\printanswers
+%Replace "Ans:" with starting keyword in solution box
+\renewcommand{\solutiontitle}{\noindent\textbf{Soln:}\enspace}   
+
+\section{Example Section}
+\fancyhead[R]{\textbf{Section}}
+
+This is an example section. You can list definitions and theorems here that are relevant to the problem set. Make sure to label them if you want to reference them in your work!
+
+
+\begin{definition}
+    \label{def:complex_field}
+    \textbf{The Complex Field}:
+    A complex number is an ordered pair $(a,b)$, where $a,b\in\mathbb R$, and in which they are written as $a+bi$, where $i=\sqrt{-1}$. The set of all complex numbers is denoted by $\mathbb C$:
+    \begin{equation}
+        \notag
+        \mathbb C=\{a+bi:a,b\in\mathbb R\}.
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    \label{def:complex_arithmetic}
+    \textbf{Arithmetic on} $\mathbb C$:
+    
+    \textbf{Addition} on $\mathbb C$ is defined by
+    \begin{equation}
+        (a+bi)+(c+di)=(a+c)+(b+d)i.
+    \end{equation}
+    
+    \textbf{Multiplication} on $\mathbb C$ is defined by
+    \begin{equation}
+        (a+bi)(c+di)=(ac-bd)+(ad+bc)i.
+    \end{equation}
+\end{definition}
+
+\begin{theorem}
+    This is a theorem that references (\ref{def:complex_arithmetic}).
+\end{theorem}
+
+\pagebreak
+
+\begin{questions}
+    \question
+    Explain why there does not exist $\lambda\in\mathbb C$ such that
+    $$
+    \lambda(2-3i,5+4i,-6+7i)=(12-5i,7+22i,-32-9i).
+    $$
+
+    \begin{solution}
+        \textbf{Proof by Contradiction}: Assume $\exists\lambda\in\mathbb C$ such that 
+        $$
+        \lambda\begin{pmatrix}
+        2-3i\\5+4i\\-6+7i
+        \end{pmatrix}=\begin{pmatrix}
+            12-5i\\7+22i\\-32-9i
+        \end{pmatrix}.
+        $$
+        If such a $\lambda$ exists, then it must satisfy the following system of complex equations:
+        $$
+        \begin{cases}
+            \lambda(2-3i) &= 12-5i \\
+            \lambda(5+4i) &= 7+22i \\
+            \lambda(-6+7i) &= -32-9i
+        \end{cases}
+        $$
+        We can solve for $\lambda$ from the first equation,
+        \begin{align}
+            \lambda(2-3i) &= 12-5i \notag\\
+            \lambda       &= \frac{12-5i}{2-3i}\notag\\
+            \lambda       &= 3+2i, \notag
+        \end{align}
+        and check if it satisfies the second equation:
+        \begin{align}
+            (3+2i)(5+4i) &= 15+12i+10i-8 \notag\\
+                         &= 7+22i.\notag
+        \end{align}
+        Thus, this $\lambda$ satisfies the first two equations. Lastly, we check the third:
+        \begin{align}
+            (3+2i)(-6+7i) &= -18+21i-12i-14 \notag\\
+                          &= -32+9i\ne -32-9i \notag
+        \end{align}
+        and arrive at a contradiction. We conclude that no single $\lambda\in\mathbb C$ can satisfy all three equations simultaneously.
+
+        $\square$
+    \end{solution}
+    \pagebreak
+
+    \question 
+    
+    For each of the following subsets of $F^3$, determine whether or not they are a subspace of $F^3$.
+    \begin{parts}
+        \part $W=\{(x_1,x_2,x_3)\in F^3: x_1+2x_2+3x_3=0 \}$
+        \part $W=\{(x_1,x_2,x_3)\in F^3: x_1+2x_2+3x_3=4 \}$
+        \part $W=\{(x_1,x_2,x_3)\in F^3: x_1x_2x_3=0 \}$
+        \part $W=\{(x_1,x_2,x_3)\in F^3: x_1=5x_3\}$
+    \end{parts}
+
+    \begin{solution}
+        We will check each $W$ to see if they satisfy the criteria  for a subspace.
+        \begin{parts}
+            \part $W=\{(x_1,x_2,x_3)\in F^3: x_1+2x_2+3x_3=0 \}$.
+
+            \textbf{Additive Identity}: $W=\{(x_1,x_2,x_3)\in F^3: x_1+2x_2+3x_3=0 \}$ contains the \textit{additive identity}, since $(0,0,0)$ satisfies $x_1+2x_2+3x_3=0$.
+
+            \begin{divv}
+            \end{divv}
+            
+            \textbf{Closed Under Addition}: Suppose $u=(x_1,x_2,x_3)\in W$ and $v=(y_1,y_2,y_3)\in W$, where each satisfy $x_1+2x_2+3x_3=0$ and $y_1+2y_2+3y_3=0$. Then:
+            \begin{equation}
+                \notag
+                (x_1+y_1)+2(x_2+y_2)+3(x_3+y_3)=(x_1+2x_2+3x_3)+(y_1+2y_2+3y_3)=0.
+            \end{equation}
+            Hence, the subset is closed under addition.
+            
+            \begin{divv}
+            \end{divv}
+            
+            \textbf{Closed Under Scalar Mult.}: Let $u=(x_1,x_2,x_3)\in W$ and $c\in F$. Then:
+            \begin{equation}
+                \notag
+                c(x_1+2x_2+3x_3)=c(0)=0.
+            \end{equation}
+            
+            \begin{divv}
+            \end{divv}
+            
+            Therefore, $cu\in W$. We conclude that this $W$ \textbf{is a subspace} of $F^3$.
+
+            $\square$
+
+            \part $W=\{(x_1,x_2,x_3)\in F^3: x_1+2x_2+3x_3=4 \}$.
+            
+            \textbf{Additive Identity}: The subset $W=\{(x_1,x_2,x_3)\in F^3:x_1+2x_2+3x_3=4\}$ \textbf{does not} contain the additive identity, since the zero vector does not satisfy $x_1+2x_2+3x_3=4$:
+            \begin{equation}
+                \notag
+                0+2(0)+3(0)\ne4.
+            \end{equation}
+            Therefore, the subset \textbf{is not a subspace} of $F^3$.
+
+            $\square$
+            \part\textbf{TODO}
+            \part\textbf{TODO}
+        \end{parts}
+    \end{solution}
+\end{questions}
+
+\end{document}
